@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block main %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+<form method="POST" action="{{url_for('contact')}}">
+    
+    <strong>{{ form.name.label }}</strong> <em class = "red">(Required)</em><br>
+    Please enter your full name <br>
+    {{ form.name }} 
+    <br>
+    <br>
+    <strong>{{ form.email.label }}</strong> <em class = "red">(Required)</em><br>
+    Please enter your e-mail address <br>
+    {{ form.email(placeholder='yourname@email.com') }}
+    <br>
+    <br>
+    <strong>{{ form.subject.label }}</strong> <em class = "red">(Required)</em><br>
+    Please enter the subject for your message <br>
+    {{ form.subject(rows="6") }}
+    <br>
+    <br>
+    <strong>{{ form.message.label }}</strong> <em class = "red">(Required)</em><br>
+    Please enter the message you would like to send <br>
+    <textarea name="message" rows="6" cols="50"></textarea>
+    
+    {{ form.csrf_token }}
+    <br>
+    <br>
+    <button type="submit">Send</button>
+    
+</form>
+
+
+{% endblock %}
